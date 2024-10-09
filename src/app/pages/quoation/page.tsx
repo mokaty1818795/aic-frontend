@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { HiArrowSmLeft } from "react-icons/hi";
 
-
-
 export default function Quotation() {
   return (
     <div className="flex w-full flex-wrap">
@@ -25,29 +23,24 @@ export default function Quotation() {
 
           <div className="flex flex-col items-center mt-6 self-center pt-3 md:pt-8">
             <div className="flex flex-row gap-2 items-center w-full mb-3">
-               <div className="px-3 py-1 rounded-2xl border">
-                    1
-               </div>
-               <p className="text-lg text-red-600">Personal Details</p>
+              <div className="px-3 py-1 rounded-2xl border">1</div>
+              <p className="text-lg text-red-600">Personal Details</p>
             </div>
             <div className="flex flex-row gap-2 items-center w-full mb-3">
-               <div className="px-3 py-1 rounded-2xl border">
-                    2
-               </div>
-               <p className="text-lg text-red-600">Cover Details</p>
+              <div className="px-3 py-1 rounded-2xl border">2</div>
+              <p className="text-lg text-red-600">Cover Details</p>
             </div>
             <div className="flex flex-row gap-2 items-center w-full mb-3">
-               <div className="px-3 py-1 rounded-2xl border">
-                    3
-               </div>
-               <p className="text-lg text-nowrap  text-red-600 ">Life 's Insured Details</p>
+              <div className="px-3 py-1 rounded-2xl border">3</div>
+              <p className="text-lg text-nowrap  text-red-600 ">
+                Life 's Insured Details
+              </p>
             </div>
           </div>
         </div>
         <div className="h-full bg-[url('/footerpic.png')] bg-cover bg-center bg-no-repeat "></div>
       </div>
-      <div className="select-none h-screen md:block md:w-1/2 lg:w-2/3">
-      </div>
+      <div className="select-none h-screen md:block md:w-1/2 lg:w-2/3"></div>
     </div>
   );
 }
