@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    transpilePackages: ['@chakra-ui/react', '@chakra-ui/core']
+};
 
 export default nextConfig;
