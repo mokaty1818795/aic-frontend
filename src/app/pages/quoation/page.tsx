@@ -33,7 +33,7 @@ export default function Quotation() {
             <div className="flex flex-row gap-2 items-center w-full mb-3">
               <div className="px-3 py-1 rounded-2xl border">3</div>
               <p className="text-lg text-nowrap  text-red-600 ">
-                Life 's Insured Details
+              Life&apos;s Insured Details
               </p>
             </div>
           </div>
