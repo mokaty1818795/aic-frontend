@@ -30,7 +30,7 @@ export default function FormSidebar() {
                 <li>batho pele</li>
                 <li>batho pele</li>
             </ul>
-            </div>
+         </div>
         </div>
         <div className="h-[61.4%] bg-[url('/footerpic.png')] bg-cover bg-center bg-no-repeat ">
         
