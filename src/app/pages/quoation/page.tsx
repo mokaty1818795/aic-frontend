@@ -4,8 +4,8 @@ import { HiArrowSmLeft } from "react-icons/hi";
 
 export default function Quotation() {
   return (
-    <div className="flex w-full flex-wrap">
-      <div className=" relative hidden  lg:flex w-full h-screen bg-red-700 shadow-md flex-col md:w-1/2 lg:w-1/3">
+    <div className="flex w-full">
+      <div className=" relative hidden md:hidden lg:flex w-full h-screen bg-red-700 shadow-md flex-col md:w-1/2 lg:w-1/3">
         <div className="absolute right-0 top-0">
           <Image
             src="/top-corner-bg.png"
@@ -51,18 +51,17 @@ export default function Quotation() {
           />
         </div>
       </div>
-      <div className="select-none h-screen p-12 md:block md:w-full lg:w-2/3">
-        <div className="w-full p-4 h-max rounded-2xl border">
+      <div className=" h-screen p-12 justify-center  md:block md:w-full lg:full">
+        <div className="w-full content-center p-4 rounded-2xl border">
             <div className="w-full p-4">
               <p className="text-3xl font-bold text-left">Fill in your details</p>
-              <p className="text-black">To complete the process please fill the form.</p>
-             
+              <p className="text-black">To complete the process please fill the form.</p>    
             </div>
-            <div className="p-4">
+            <div className="p-4 mx-auto">
               <FormStepper/>
             </div>
         </div>
-      </div>
+      </div>     
     </div>
   );
 }
