@@ -1,10 +1,15 @@
+"use client";
 import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
 import { HiArrowSmLeft } from "react-icons/hi";
 
 export default function Quotation() {
+  function handleClick() {
+    console.log("increment like count");
+  }
+
   return (
-    <div className="flex w-full">
+    <div className="flex w-full flex-wrap">
       <div className=" relative hidden md:hidden lg:flex w-full h-screen bg-red-700 shadow-md flex-col md:w-1/2 lg:w-1/3">
         <div className="absolute right-0 top-0">
           <Image
@@ -51,17 +56,119 @@ export default function Quotation() {
           />
         </div>
       </div>
-      <div className=" h-screen p-12 justify-center  md:block md:w-full lg:full">
-        <div className="w-full content-center p-4 rounded-2xl border">
-            <div className="w-full p-4">
-              <p className="text-3xl font-bold text-left">Fill in your details</p>
-              <p className="text-black">To complete the process please fill the form.</p>    
-            </div>
-            <div className="p-4 mx-auto">
-              <FormStepper/>
-            </div>
+
+      <div className=" p-4 lg:p-20  bg-gray-50 h-screen  md:block md:w-full  w-full lg:w-2/3">
+        <div className="w-full shadow-sm lg:p-4 p-2 rounded-2xl bg-white border">
+          <div className="w-full lg:p-4">
+            <p className="lg:text-3xl md:text-lg text-md font-bold text-left">
+              Fill in your details
+            </p>
+            <p className="text-black">
+              To complete the process please fill the form.
+            </p>
+          </div>
+          <div className="lg:p-4 w-full">
+            <FormStepper />
+          </div>
+          <div className="w-full mt-5 lg:p-4">
+            <form>
+              <div className="-mx-3 flex flex-wrap">
+                <div className="w-full px-3 sm:w-1/2">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium text-gray-500">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
+                    />
+                  </div>
+                </div>
+                <div className="w-full px-3 sm:w-1/2">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium text-gray-500">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      name="lastname"
+                      id="suename"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="-mx-3 flex flex-wrap">
+                <div className="w-full px-3 sm:w-1/2">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium text-gray-500">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="name"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
+                    />
+                  </div>
+                </div>
+                <div className="w-full px-3 sm:w-1/2">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium text-gray-500">
+                      Date Of Birth
+                    </label>
+                    <input
+                      type="date"
+                      name="dob"
+                      id="suename"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="-mx-3 flex flex-wrap">
+                <div className="w-full px-3 sm:w-1/2">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium text-gray-500">
+                      Phone Number
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="name"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
+                    />
+                  </div>
+                </div>
+                <div className="w-full px-3 sm:w-1/2">
+                  <div className="mb-5">
+                    <label className="mb-3 block text-base font-medium text-gray-500">
+                      National Id
+                    </label>
+                    <input
+                      type="text"
+                      name="nationalId"
+                      id="nationaId"
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="w-full">
+                <button
+                  onClick={handleClick}
+                  type="button"
+                  className="text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 me-2 mb-2"
+                >
+                  Next
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>     
+      </div>
     </div>
   );
 }
