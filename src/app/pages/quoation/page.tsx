@@ -10,7 +10,7 @@ import { useDisclosure } from "@chakra-ui/react";
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [selected, setSelected] = useState<boolean>(false);
+  // const [selected, setSelected] = useState<boolean>(false);
 
   function handleClick() {
     console.log("increment like count");
