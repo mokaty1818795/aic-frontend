@@ -6,16 +6,22 @@ export default function BeneFiaryTable() {
           <thead className="text-xs text-gray-900 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Product name
+              Number
               </th>
               <th scope="col" className="px-6 py-3">
-                Color
+              Relationship Group
               </th>
               <th scope="col" className="px-6 py-3">
-                Category
+              Type Of Relationship
               </th>
               <th scope="col" className="px-6 py-3">
-                Price
+              Premium Amount
+              </th>
+              <th scope="col" className="px-6 py-3">
+              Age
+              </th>
+              <th scope="col" className="px-6 py-3">
+              Action
               </th>
             </tr>
           </thead>
@@ -25,11 +31,13 @@ export default function BeneFiaryTable() {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
               >
-                Apple MacBook Pro 17"
+                1
               </th>
-              <td className="px-6 py-4  text-gray-900">Silver</td>
-              <td className="px-6 py-4  text-gray-900">Laptop</td>
-              <td className="px-6 py-4  text-gray-900">$2999</td>
+              <td className="px-6 py-4  text-gray-900">Immediate Family</td>
+              <td className="px-6 py-4  text-gray-900">Child</td>
+              <td className="px-6 py-4  text-gray-900">M6.00</td>
+              <td className="px-6 py-4  text-gray-900">19</td>
+              <td className="px-6 py-4  text-gray-900">Action</td>
             </tr>
           </tbody>
         </table>
