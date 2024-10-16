@@ -2,10 +2,14 @@
 import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
 import { useState } from "react";
-import { HiArrowSmLeft } from "react-icons/hi";
+import { HiArrowSmLeft, HiPlus } from "react-icons/hi";
+import BeneFiaryTable from "../../components/ui/table";
+import FormModal from "../../components/ui/modal";
+import { useDisclosure } from "@chakra-ui/react";
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [selected, setSelected] = useState<boolean>(false);
 
   function handleClick() {
@@ -78,7 +82,7 @@ export default function Quotation() {
 
           <div className="w-full  lg:p-4">
             <form>
-              {step == 1 && (
+              {step == 3 && (
                 <>
                   <div className="-mx-3 flex flex-wrap">
                     <div className="w-full px-3 sm:w-1/2">
@@ -242,9 +246,41 @@ export default function Quotation() {
                 </>
               )}
 
-              {step == 3 && (
+              {step == 1 && (
                 <div className="w-full">
-                  <p>Hello4</p>
+                  <div className="flex flex-row items-center justify-between w-full">
+                    <div>
+                      <p className="text-2xl font-bold">
+                        Add your family details
+                      </p>
+                    </div>
+                    <div>
+                      <FormModal onClose={onClose} isOpen={isOpen} />
+
+                      <button
+                        type="button"
+                        onClick={onOpen}
+                        className="text-white bg-red-600 hover:bg-red-100 hover:text-red-600 focus:ring-4 focus:outline-none focus:ring-red-600 font-medium rounded-lg text-sm px-6 py-2.5 text-center inline-flex items-center dark:focus:ring-[#3b5998]/55 me-2 mb-2"
+                      >
+                        <HiPlus
+                          style={{
+                            fontSize: "20",
+                          }}
+                        />
+                        Add Field
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-4 w-full">
+                    <p className="text-red-600 text-base">
+                      Please note you can only add up to 7 seven children, 1
+                      spouse, 4 extended families as parents and 2 other
+                      relatives.
+                    </p>
+                  </div>
+                  <div className="w-full mt-4 bg-red-100 rounded-md">
+                    <BeneFiaryTable />
+                  </div>
                 </div>
               )}
 
