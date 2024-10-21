@@ -1,5 +1,5 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Button,
   Modal,
@@ -11,6 +11,8 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 import LifesInsured from "../../types/relations.types";
+import useTableData, { Person } from "@/app/hooks/useAddTableData";
+import { numberRegex } from "@/lib/utils";
 
 interface Modalprops {
   onClose: () => void;
@@ -22,7 +24,7 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LifesInsured>({
+  } = useForm<Person>({
     defaultValues: {
       relationShipGroup: "",
       typeofrelationship: "",
@@ -31,7 +33,12 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
     },
   });
 
-  const onSubmit = (data: LifesInsured) => console.log(data);
+  const { setTableData } = useTableData();
+
+  const onSubmit = (data: LifesInsured) => {
+    console.log(data);
+    setTableData(data);
+  };
 
   return (
     <Modal
@@ -61,10 +68,7 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                   {...register("age", {
                     required: true,
                     validate: {
-                      matchPattern: (v) =>
-                        /^(?:-(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))|(?:0|(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))))(?:.\d+|)$/.test(
-                          v
-                        ),
+                      matchPattern: (v) => numberRegex.test(v),
                     },
                   })}
                 />
