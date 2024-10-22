@@ -1,8 +1,9 @@
 interface LifesInsured {
+  id: number;
   relationShipGroup: string;
   typeofrelationship: string;
-  premiumAmount: number;
-  age: number;
+  premiumAmount: string;
+  age: string;
 }
 
 export default LifesInsured;
