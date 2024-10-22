@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Button,
   Modal,
@@ -9,6 +10,7 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
+import LifesInsured from "../../types/relations.types";
 
 interface Modalprops {
   onClose: () => void;
@@ -16,6 +18,13 @@ interface Modalprops {
 }
 
 export default function FormModal({ onClose, isOpen }: Modalprops) {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<LifesInsured>();
+
   return (
     <Modal
       isCentered
@@ -25,66 +34,72 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
     >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader color="#CF0909" fontWeight="bold">Add Insured Details</ModalHeader>
+        <ModalHeader color="#CF0909" fontWeight="bold">
+          Add Insured Details
+        </ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <div className="w-full">
-            <div className="mb-5">
-              <label className="mb-3 block text-base text-gray-500">Age</label>
-              <input
-                type="text"
-                name="nationalId"
-                placeholder="19"
-                id="nationaId"
-                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
-              />
+          <form>
+            <div className="w-full">
+              <div className="mb-5">
+                <label className="mb-3 block text-base text-gray-500">
+                  Age
+                </label>
+                <input
+                  type="text"
+                  name="nationalId"
+                  placeholder="19"
+                  id="nationaId"
+                  className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
+                />
+              </div>
             </div>
-          </div>
-          <div className=" mt-3 w-full">
-            <div className="mb-5">
-              <label className="mb-3 block text-base text-gray-500">
-                Cover Amount
-              </label>
-              <select
-                id="countries"
-                className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-              >
-                <option selected>Choose Amount</option>
-                <option value="US">M30</option>
-                <option value="CA">M74</option>
-              </select>
+            <div className=" mt-3 w-full">
+              <div className="mb-5">
+                <label className="mb-3 block text-base text-gray-500">
+                  Cover Amount
+                </label>
+                <select
+                  id="countries"
+                  className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                >
+                  <option selected>Choose Amount</option>
+                  <option value="US">M30</option>
+                  <option value="CA">M74</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div className=" mt-3 w-full">
-            <div className="mb-5">
-              <label className="mb-3 block text-base text-gray-500">
-                Relationship Group
-              </label>
-              <select
-                id="countries"
-                className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-              >
-                <option selected>Choose Amount</option>
-                <option value="US">M30</option>
-                <option value="CA">M74</option>
-              </select>
+            <div className=" mt-3 w-full">
+              <div className="mb-5">
+                <label className="mb-3 block text-base text-gray-500">
+                  Relationship Group
+                </label>
+                <select
+                  id="countries"
+                  className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                >
+                  <option selected>Choose Amount</option>
+                  <option value="US">M30</option>
+                  <option value="CA">M74</option>
+                </select>
+              </div>
             </div>
-          </div>
-          <div className=" mt-3 w-full">
-            <div className="mb-5">
-              <label className="mb-3 block text-base text-gray-500">
-                Type Of Relationship
-              </label>
-              <select
-                id="countries"
-                className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-              >
-                <option selected>Choose Amount</option>
-                <option value="US">M30</option>
-                <option value="CA">M74</option>
-              </select>
+            <div className=" mt-3 w-full">
+              <div className="mb-5">
+                <label className="mb-3 block text-base text-gray-500">
+                  Type Of Relationship
+                </label>
+                <select
+                  id="countries"
+                  className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
+                >
+                  <option selected>Choose Amount</option>
+                  <option value="US">M30</option>
+                  <option value="CA">M74</option>
+                </select>
+              </div>
             </div>
-          </div>
+          </form>
         </ModalBody>
         <ModalFooter gap={2}>
           <Button
@@ -94,7 +109,7 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
               border: "2px solid #CF0909",
               borderWidth: "2",
               color: "#CF0909",
-              borderColor:"#CF0909"
+              borderColor: "#CF0909",
             }}
             color="white"
           >
