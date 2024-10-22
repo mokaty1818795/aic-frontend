@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import React from "react";
+import { useForm } from "react-hook-form";
 import {
   Button,
   Modal,
@@ -10,9 +10,8 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
-import LifesInsured from "../../types/relations.types";
-import useTableData, { Person } from "@/app/hooks/useAddTableData";
 import { numberRegex } from "@/lib/utils";
+import QuotationTypes from "@/app/types/quotation.types";
 
 interface Modalprops {
   onClose: () => void;
@@ -24,20 +23,19 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Person>({
+  } = useForm<QuotationTypes>({
     defaultValues: {
-      relationShipGroup: "",
-      typeofrelationship: "",
-      premiumAmount: "",
-      age: "",
+      insuredDetails: {
+        age: "",
+        premiumAmount: "",
+        relationshipGroup: "",
+        typeofRelationship: "",
+      },
     },
   });
 
-  const { setTableData } = useTableData();
-
-  const onSubmit = (data: LifesInsured) => {
+  const onSubmit = (data: QuotationTypes) => {
     console.log(data);
-    setTableData(data);
   };
 
   return (
@@ -65,18 +63,18 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                   placeholder="19"
                   id="nationaId"
                   className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base  text-[#6B7280] outline-none focus:border-red-400 focus:shadow-md"
-                  {...register("age", {
+                  {...register("insuredDetails.age", {
                     required: true,
                     validate: {
                       matchPattern: (v) => numberRegex.test(v),
                     },
                   })}
                 />
-                {errors.age?.type === "required" && (
+                {errors.insuredDetails?.age?.type === "required" && (
                   <p className="text-base text-red-600">Age is required</p>
                 )}
 
-                {errors.age?.type === "matchPattern" && (
+                {errors.insuredDetails?.age?.type === "matchPattern" && (
                   <p className="text-base text-red-600">
                     Age must only be Numbers
                   </p>
@@ -91,7 +89,7 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                 <select
                   id="countries"
                   className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                  {...register("premiumAmount", {
+                  {...register("insuredDetails.premiumAmount", {
                     required: "please select amount",
                   })}
                 >
@@ -101,9 +99,9 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                   <option value="30.00">M30</option>
                   <option value="74.00">M74</option>
                 </select>
-                {errors.premiumAmount && (
+                {errors.insuredDetails?.premiumAmount && (
                   <p className="text-base text-red-600">
-                    {errors.premiumAmount.message}
+                    {errors.insuredDetails?.premiumAmount.message}
                   </p>
                 )}
               </div>
@@ -116,7 +114,7 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                 <select
                   id="countries"
                   className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                  {...register("relationShipGroup", {
+                  {...register("insuredDetails.relationshipGroup", {
                     required: "please select relationship group",
                   })}
                 >
@@ -126,9 +124,9 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                   <option value="Immediate Family">Immediate Family</option>
                   <option value="Extended Family">Extended Family</option>
                 </select>
-                {errors.relationShipGroup && (
+                {errors?.insuredDetails?.relationshipGroup && (
                   <p className="text-base text-red-600">
-                    {errors.relationShipGroup.message}
+                    {errors.insuredDetails?.relationshipGroup.message}
                   </p>
                 )}
               </div>
@@ -141,7 +139,7 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                 <select
                   id="countries"
                   className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 "
-                  {...register("typeofrelationship", {
+                  {...register("insuredDetails.typeofRelationship", {
                     required: "please select relationship type",
                   })}
                 >
@@ -151,9 +149,9 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
                   <option value="Children">Children</option>
                   <option value="Spouse">Spouse</option>
                 </select>
-                {errors.typeofrelationship && (
+                {errors?.insuredDetails?.typeofRelationship && (
                   <p className="text-base text-red-600">
-                    {errors.typeofrelationship.message}
+                    {errors.insuredDetails?.typeofRelationship.message}
                   </p>
                 )}
               </div>

@@ -7,3 +7,5 @@ export function cn(...inputs: ClassValue[]) {
 
 export const numberRegex =
   /^(?:-(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))|(?:0|(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))))(?:.\d+|)$/;
+
+export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
