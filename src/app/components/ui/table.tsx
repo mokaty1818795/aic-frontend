@@ -29,9 +29,9 @@ export default function BeneFiaryTable({ data }: ItableProps) {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => {
+            {data.map((item, key) => {
               return (
-                <tr className="bg-white border-b border-gray-200">
+                <tr key={key} className="bg-white border-b border-gray-200">
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
