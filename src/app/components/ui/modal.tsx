@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import React from "react";
+import { useForm } from "react-hook-form";
 import {
   Button,
   Modal,
@@ -10,7 +10,6 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
-import useTableData from "@/app/hooks/useAddTableData";
 import { numberRegex } from "@/lib/utils";
 import QuotationTypes from "@/app/types/quotation.types";
 

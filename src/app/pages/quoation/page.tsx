@@ -1,12 +1,11 @@
 "use client";
 import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiArrowSmLeft, HiPlus } from "react-icons/hi";
 import BeneFiaryTable from "../../components/ui/table";
 import FormModal from "../../components/ui/modal";
 import { useDisclosure } from "@chakra-ui/react";
-import useTableData from "../../hooks/useAddTableData";
 import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
 import { emailRegex, numberRegex } from "@/lib/utils";
@@ -14,7 +13,6 @@ import { emailRegex, numberRegex } from "@/lib/utils";
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { tableData } = useTableData();
 
   const {
     register,
