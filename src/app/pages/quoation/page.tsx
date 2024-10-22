@@ -1,21 +1,30 @@
 "use client";
 import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiArrowSmLeft, HiPlus } from "react-icons/hi";
 import BeneFiaryTable from "../../components/ui/table";
 import FormModal from "../../components/ui/modal";
 import { useDisclosure } from "@chakra-ui/react";
+import useTableData from "../../hooks/useAddTableData";
+import LifesInsured from "@/app/types/relations.types";
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [selected, setSelected] = useState<boolean>(false);
+  const { tableData } = useTableData();
+  const [lifesInsured, setLifesInsured] = useState<LifesInsured[]>();
 
   function handleClick() {
     console.log("increment like count");
     setStep(step + 1);
   }
+
+  useEffect(() => {
+    if (tableData) {
+      // setLifesInsured();
+    }
+  }, [tableData]);
 
   return (
     <div className="flex w-full flex-wrap">
@@ -279,7 +288,7 @@ export default function Quotation() {
                     </p>
                   </div>
                   <div className="w-full mt-4 bg-red-100 rounded-md">
-                    <BeneFiaryTable />
+                    <BeneFiaryTable data={lifesInsured} />
                   </div>
                 </div>
               )}
