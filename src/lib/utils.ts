@@ -9,3 +9,7 @@ export const numberRegex =
   /^(?:-(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))|(?:0|(?:[1-9](?:\d{0,2}(?:,\d{3})+|\d*))))(?:.\d+|)$/;
 
 export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const pageNavigations = {
+  successPage: "pages/success",
+};
