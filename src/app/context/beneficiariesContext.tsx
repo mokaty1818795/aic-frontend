@@ -2,7 +2,15 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import QuotationTypes from "../types/quotation.types";
 
-const BeneficiaryContext = createContext<any>(null);
+interface BeneficiaryContextType {
+  beneficiaries: QuotationTypes["insuredDetails"][];
+  addBeneficiary: (beneficiary: QuotationTypes["insuredDetails"]) => void;
+  removeBeneficiary: (index: number) => void;
+}
+
+const BeneficiaryContext = createContext<BeneficiaryContextType | undefined>(
+  undefined
+);
 
 export const BeneficiaryProvider = ({ children }: { children: ReactNode }) => {
   const [beneficiaries, setBeneficiaries] = useState<
@@ -25,4 +33,12 @@ export const BeneficiaryProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useBeneficiaries = () => useContext(BeneficiaryContext);
+export const useBeneficiaries = () => {
+  const context = useContext(BeneficiaryContext);
+  if (!context) {
+    throw new Error(
+      "useBeneficiaries must be used within a BeneficiaryProvider"
+    );
+  }
+  return context;
+};

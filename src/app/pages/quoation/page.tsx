@@ -124,7 +124,7 @@ export default function Quotation() {
 
           <div className="w-full  lg:p-4">
             <form>
-              {step == 3 && (
+              {step == 1 && (
                 <>
                   <div className="-mx-3 flex flex-wrap">
                     <div className="w-full px-3 sm:w-1/2">
@@ -394,7 +394,7 @@ export default function Quotation() {
                 </>
               )}
 
-              {step == 1 && (
+              {step == 3 && (
                 <div className="w-full">
                   <div className="flex flex-row items-center justify-between w-full">
                     <div>
