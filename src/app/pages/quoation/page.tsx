@@ -1,21 +1,20 @@
 "use client";
+
 import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HiArrowSmLeft, HiPlus } from "react-icons/hi";
 import BeneFiaryTable from "../../components/ui/table";
 import FormModal from "../../components/ui/modal";
 import { useDisclosure } from "@chakra-ui/react";
 import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
-import { emailRegex, numberRegex } from "@/lib/utils";
-import useTableData from "@/app/hooks/useAddTableData";
+import { emailRegex, numberRegex, pageNavigations } from "@/lib/utils";
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
   const [completedStep, setcompletedStep] = useState<number>(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { beneficiaries, insureds } = useTableData();
 
   const {
     register,
@@ -41,18 +40,10 @@ export default function Quotation() {
     },
   });
 
-  useEffect(() => {
-    if (beneficiaries) {
-      console.log("Hello Wena:", beneficiaries);
-    }
-
-    if (insureds) {
-      console.log("Hello Wena111:", insureds);
-    }
-  }, [insureds, beneficiaries]);
-
   const onSubmit = (data: QuotationTypes) => {
-    console.log(data);
+    if (data.coverDetails.coverOption === "Member Only") {
+      window.location.href = pageNavigations.successPage;
+    }
     handleClick();
   };
 
