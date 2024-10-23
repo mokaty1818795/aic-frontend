@@ -1,23 +1,63 @@
-export default function FormStepper() {
+type StepperProps = {
+  activeStep: number;
+};
+
+export default function FormStepper({ activeStep }: StepperProps) {
   return (
-    <ol className="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base">
-      <li className="flex md:w-full items-center text-red-600  sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
-        <span className="flex items-center after:content-['/'] gap-2 sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
-          <div className="px-2 border hidden rounded-xl">1</div>
-          Personal
-          <span className="hidden sm:inline-flex sm:ms-1">Details</span>
-        </span>
-      </li>
-      <li className="flex md:w-full items-center after:content-['/'] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
-        <span className="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
-          <div className="px-2 me-2 border hidden rounded-xl">2</div>
-          Account <span className="hidden sm:inline-flex sm:ms-2">Info</span>
-        </span>
-      </li>
-      <li className="flex items-center  whitespace-pre-line">
-        <div className="px-2 me-2 border hidden rounded-xl">3</div>
-        Life&apos;s Insured Details
-      </li>
-    </ol>
+    <div className=" flex w-full mt-4  items-center space-x-4 md:justify-center md:px-10">
+      <span
+        className={`hidden h-8 w-8 items-center justify-center rounded-full  ${
+          activeStep === 1 ? "bg-red-600 text-white" : "border"
+        } text-gray-500  } shadow md:inline-flex`}
+      >
+        1
+      </span>
+      <span
+        className={`hidden ${
+          activeStep === 1 ? "text-red-600" : "text-gray-500"
+        }      
+        md:inline`}
+      >
+        Personal Details
+      </span>
+      <span
+        className={`hidden h-0 w-10 border-t-2 border-dashed  ${
+          activeStep === 1 ? " border-red-600" : "border-gray-400"
+        }     
+        border-gray-400 md:inline`}
+      ></span>
+      <span
+        className={`flex h-8 w-8    ${
+          activeStep === 2 ? "bg-red-600 text-white" : "border"
+        }   items-center  justify-center rounded-full 
+         text-gray-500 shadow   `}
+      >
+        2
+      </span>
+      <span
+        className={`font-semibold ${
+          activeStep === 2 ? "text-red-600" : "text-gray-500"
+        }   md:inline`}
+      >
+        Cover Details
+      </span>
+      <span
+        className={`hidden h-0 w-10 border-t-2 border-dashed  border-gray-400 md:inline`}
+      ></span>
+      <span
+        className={`flex h-8 w-8 items-center justify-center rounded-full   ${
+          activeStep === 3 ? "bg-red-600 text-white  " : "border"
+        }    text-gray-500 shadow`}
+      >
+        3
+      </span>
+      <span
+        className={`hidden ${
+          activeStep === 3 ? "text-red-600" : "text-gray-500"
+        } md:inline`}
+      >
+        Life’s Insured Details
+      </span>
+    </div>
   );
 }

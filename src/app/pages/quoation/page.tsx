@@ -13,6 +13,7 @@ import useTableData from "@/app/hooks/useAddTableData";
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
+  const [completedStep, setcompletedStep] = useState<number>(0);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { beneficiaries, insureds } = useTableData();
 
@@ -57,6 +58,7 @@ export default function Quotation() {
 
   function handleClick() {
     setStep(step + 1);
+    setcompletedStep(completedStep + 1);
   }
 
   return (
@@ -118,8 +120,8 @@ export default function Quotation() {
               To complete the process please fill the form.
             </p>
           </div>
-          <div className="lg:p-4 w-full">
-            <FormStepper />
+          <div className="lg:p-2 w-full">
+            <FormStepper activeStep={step} />
           </div>
 
           <div className="w-full  lg:p-4">
