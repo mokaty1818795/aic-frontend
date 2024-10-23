@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { numberRegex } from "@/lib/utils";
 import QuotationTypes from "@/app/types/quotation.types";
+import { useBeneficiaries } from "../../context/beneficiariesContext";
 
 interface Modalprops {
   onClose: () => void;
@@ -19,9 +20,11 @@ interface Modalprops {
 }
 
 export default function FormModal({ onClose, isOpen }: Modalprops) {
+  const { addBeneficiary } = useBeneficiaries();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<QuotationTypes>({
     defaultValues: {
@@ -36,6 +39,10 @@ export default function FormModal({ onClose, isOpen }: Modalprops) {
 
   const onSubmit = (data: QuotationTypes) => {
     console.log(data);
+    addBeneficiary(data.insuredDetails);
+    reset();
+
+    console.log("Updated Reached here");
   };
 
   return (

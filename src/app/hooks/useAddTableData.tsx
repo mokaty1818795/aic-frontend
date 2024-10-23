@@ -1,21 +1,24 @@
-import { useState } from "react";
-import LifesInsured from "../types/relations.types";
-
-export interface Person {
-  id: number;
-  relationShipGroup: string;
-  typeofrelationship: string;
-  premiumAmount: string;
-  age: string;
-  occupation: string;
-}
+import { useEffect, useState } from "react";
+import QuotationTypes from "../types/quotation.types";
 
 function useTableData() {
-  const [tableData, setTableData] = useState<LifesInsured>();
+  const [beneficiaries, setBeneficiaries] = useState<
+    QuotationTypes["insuredDetails"][]
+  >([]);
 
-  console.log(tableData);
+  const [insureds, setInsured] = useState<QuotationTypes["insuredDetails"][]>(
+    []
+  );
 
-  return { tableData, setTableData };
+  const addBeneficiary = (beneficiary: QuotationTypes["insuredDetails"]) => {
+    setBeneficiaries((prev) => [...prev, beneficiary]);
+    console.log(beneficiaries);
+  };
+  useEffect(() => {
+    console.log("Beneficiaries updated:", beneficiaries);
+    setInsured(beneficiaries);
+  }, [beneficiaries]);
+  return { beneficiaries, insureds, addBeneficiary };
 }
 
 export default useTableData;

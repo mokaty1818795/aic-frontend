@@ -1,7 +1,7 @@
 "use client";
 import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HiArrowSmLeft, HiPlus } from "react-icons/hi";
 import BeneFiaryTable from "../../components/ui/table";
 import FormModal from "../../components/ui/modal";
@@ -9,10 +9,12 @@ import { useDisclosure } from "@chakra-ui/react";
 import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
 import { emailRegex, numberRegex } from "@/lib/utils";
+import useTableData from "@/app/hooks/useAddTableData";
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { beneficiaries, insureds } = useTableData();
 
   const {
     register,
@@ -37,6 +39,16 @@ export default function Quotation() {
       },
     },
   });
+
+  useEffect(() => {
+    if (beneficiaries) {
+      console.log("Hello Wena:", beneficiaries);
+    }
+
+    if (insureds) {
+      console.log("Hello Wena111:", insureds);
+    }
+  }, [insureds, beneficiaries]);
 
   const onSubmit = (data: QuotationTypes) => {
     console.log(data);
@@ -112,7 +124,7 @@ export default function Quotation() {
 
           <div className="w-full  lg:p-4">
             <form>
-              {step == 1 && (
+              {step == 3 && (
                 <>
                   <div className="-mx-3 flex flex-wrap">
                     <div className="w-full px-3 sm:w-1/2">
@@ -382,7 +394,7 @@ export default function Quotation() {
                 </>
               )}
 
-              {step == 3 && (
+              {step == 1 && (
                 <div className="w-full">
                   <div className="flex flex-row items-center justify-between w-full">
                     <div>
@@ -415,7 +427,7 @@ export default function Quotation() {
                     </p>
                   </div>
                   <div className="w-full mt-4 bg-red-100 rounded-md">
-                    <BeneFiaryTable data={[]} />
+                    <BeneFiaryTable />
                   </div>
                 </div>
               )}
