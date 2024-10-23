@@ -1,12 +1,8 @@
 type StepperProps = {
   activeStep: number;
-  completeStep: number;
 };
 
-export default function FormStepper({
-  activeStep,
-  completeStep,
-}: StepperProps) {
+export default function FormStepper({ activeStep }: StepperProps) {
   return (
     <div className=" flex w-full mt-4  items-center space-x-4 md:justify-center md:px-10">
       <span

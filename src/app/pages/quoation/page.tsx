@@ -121,7 +121,7 @@ export default function Quotation() {
             </p>
           </div>
           <div className="lg:p-2 w-full">
-            <FormStepper activeStep={step} completeStep={completedStep} />
+            <FormStepper activeStep={step} />
           </div>
 
           <div className="w-full  lg:p-4">
