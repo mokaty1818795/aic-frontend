@@ -43,8 +43,12 @@ export default function Quotation() {
   const onSubmit = (data: QuotationTypes) => {
     if (data.coverDetails.coverOption === "Member Only") {
       window.location.href = pageNavigations.successPage;
+    } else {
+      if (step === 3) {
+        window.location.href = pageNavigations.successPage;
+      }
+      handleClick();
     }
-    handleClick();
   };
 
   function handleClick() {
@@ -431,7 +435,7 @@ export default function Quotation() {
                   type="button"
                   className="text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 me-2 mb-2"
                 >
-                  Next
+                  {step === 3 ? "Create Quotation" : "Next"}
                 </button>
               </div>
             </form>

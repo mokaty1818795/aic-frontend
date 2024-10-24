@@ -1,10 +1,12 @@
+"use client";
 import Image from "next/image";
 
 export default function Success() {
   return (
-    <div className=" w-full">
+    <div className=" w-full h-screen">
       <Image src="/logo.png" alt="alliance" width={150} height={150} priority />
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div></div>
+      <div className="flex flex-col mt-32 items-center justify-center">
         <Image
           src="/Message.png"
           alt="alliance"
