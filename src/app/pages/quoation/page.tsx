@@ -19,7 +19,7 @@ export default function Quotation() {
 
   const {
     register,
-    handleSubmit,
+    // handleSubmit,
     formState: { errors },
   } = useForm<QuotationTypes>({
     defaultValues: {
@@ -41,21 +41,21 @@ export default function Quotation() {
     },
   });
 
-  const onSubmit = (data: QuotationTypes) => {
-    if (data.coverDetails.coverOption === "Member Only") {
-      window.location.href = pageNavigations.successPage;
-    } else {
-      if (step === 3) {
-        window.location.href = pageNavigations.successPage;
-      }
-      handleClick();
-    }
-  };
+  // const onSubmit = (data: QuotationTypes) => {
+  //   if (data.coverDetails.coverOption === "Member Only") {
+  //     window.location.href = pageNavigations.successPage;
+  //   } else {
+  //     if (step === 3) {
+  //       window.location.href = pageNavigations.successPage;
+  //     }
+  //     handleClick();
+  //   }
+  // };
 
-  function handleClick() {
-    setStep(step + 1);
-    setcompletedStep(completedStep + 1);
-  }
+  // function handleClick() {
+  //   setStep(step + 1);
+  //   setcompletedStep(completedStep + 1);
+  // }
 
   const getUser = async()=>{
    await getUserByID("051257152696");
