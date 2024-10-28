@@ -10,6 +10,7 @@ import { useDisclosure } from "@chakra-ui/react";
 import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
 import { emailRegex, numberRegex, pageNavigations } from "@/lib/utils";
+import { getUserByID } from "@/api/services";
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
@@ -54,6 +55,10 @@ export default function Quotation() {
   function handleClick() {
     setStep(step + 1);
     setcompletedStep(completedStep + 1);
+  }
+
+  const getUser = async()=>{
+   await getUserByID("051257152696");
   }
 
   return (
@@ -431,7 +436,7 @@ export default function Quotation() {
 
               <div className="w-full mt-4">
                 <button
-                  onClick={handleSubmit(onSubmit)}
+                  onClick={getUser}
                   type="button"
                   className="text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 me-2 mb-2"
                 >

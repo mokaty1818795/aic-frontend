@@ -13,3 +13,6 @@ export const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const pageNavigations = {
   successPage: "pages/success",
 };
+
+
+export const BASE_URL ="https://life-dsk-082.alliance.co.ls/quotations/api/"
