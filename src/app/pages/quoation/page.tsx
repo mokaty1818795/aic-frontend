@@ -9,12 +9,13 @@ import FormModal from "../../components/ui/modal";
 import { useDisclosure } from "@chakra-ui/react";
 import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
-import { emailRegex, numberRegex, pageNavigations } from "@/lib/utils";
+import { emailRegex, numberRegex, } from "@/lib/utils";
 import { getUserByID } from "@/api/services";
 
 export default function Quotation() {
-  const [step, setStep] = useState<number>(1);
-  const [completedStep, setcompletedStep] = useState<number>(0);
+  // const [step, setStep] = useState<number>(1);
+  // const [completedStep, setcompletedStep] = useState<number>(0);
+  // pageNavigations
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
