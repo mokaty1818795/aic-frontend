@@ -15,4 +15,4 @@ export const pageNavigations = {
 };
 
 
-export const BASE_URL ="https://life-dsk-082.alliance.co.ls/quotations/api/"
+export const BASE_URL ="https://aic-api-cphradewfgehdpb7.southafricanorth-01.azurewebsites.net/v1/api"

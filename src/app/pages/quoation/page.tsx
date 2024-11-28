@@ -2,7 +2,7 @@
 
 import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
-// import { useState } from "react";
+import { useState } from "react";
 import { HiArrowSmLeft, HiPlus } from "react-icons/hi";
 import BeneFiaryTable from "../../components/ui/table";
 import FormModal from "../../components/ui/modal";
@@ -10,17 +10,17 @@ import { useDisclosure } from "@chakra-ui/react";
 import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
 import { emailRegex, numberRegex, } from "@/lib/utils";
-import { getUserByID } from "@/api/services";
+import { getUserByID,getLivesProducts } from "@/api/services";
 
 export default function Quotation() {
-  // const [step, setStep] = useState<number>(1);
-  // const [completedStep, setcompletedStep] = useState<number>(0);
-  // pageNavigations
+  const [step, setStep] = useState<number>(1);
+  const [completedStep, setcompletedStep] = useState<number>(0);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const {
     register,
-    // handleSubmit,
+     handleSubmit,
     formState: { errors },
   } = useForm<QuotationTypes>({
     defaultValues: {
@@ -42,24 +42,25 @@ export default function Quotation() {
     },
   });
 
-  // const onSubmit = (data: QuotationTypes) => {
-  //   if (data.coverDetails.coverOption === "Member Only") {
-  //     window.location.href = pageNavigations.successPage;
-  //   } else {
-  //     if (step === 3) {
-  //       window.location.href = pageNavigations.successPage;
-  //     }
-  //     handleClick();
-  //   }
-  // };
+  const onSubmit = (data: QuotationTypes) => {
+    // if (data.coverDetails.coverOption === "Member Only") {
+    //   window.location.href = pageNavigations.successPage;
+    // } else {
+    //   if (step === 3) {
+    //     window.location.href = pageNavigations.successPage;
+    //   }
+     
+    // }
+    handleClick();
+  };
 
-  // function handleClick() {
-  //   setStep(step + 1);
-  //   setcompletedStep(completedStep + 1);
-  // }
+  function handleClick() {
+    setStep(step + 1);
+    setcompletedStep(completedStep + 1);
+  }
 
   const getUser = async()=>{
-   await getUserByID("051257152696");
+   await getLivesProducts("Male",25,10000,10000);
   }
 
   return (
@@ -437,7 +438,9 @@ export default function Quotation() {
 
               <div className="w-full mt-4">
                 <button
-                  onClick={getUser}
+                  onClick={()=>{
+                    onSubmit()
+                  }}
                   type="button"
                   className="text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 me-2 mb-2"
                 >
