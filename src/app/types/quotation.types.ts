@@ -1,5 +1,3 @@
-import { StringDecoder } from "string_decoder";
-
 type QuotationTypes = {
   personalDetails: {
     firstName: string;
