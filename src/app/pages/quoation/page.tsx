@@ -1,7 +1,7 @@
 "use client";
 
-import FormStepper from "../../components/ui/stepper";
 import Image from "next/image";
+import { useRouter } from 'next/navigation'
 import { useState } from "react";
 import { HiArrowSmLeft, HiPlus } from "react-icons/hi";
 import BeneFiaryTable from "../../components/ui/table";
@@ -10,10 +10,9 @@ import { useDisclosure } from "@chakra-ui/react";
 import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
 import { emailRegex, numberRegex, } from "@/lib/utils";
-import { getUserByID,getLivesProducts } from "@/api/services";
-import FuneralQuote from "@/app/components/ui/funeral/funeral";
 import LifeCover from "@/app/components/ui/livecover/lifecover";
 import { differenceInYears } from 'date-fns';
+import FuneralQuote from "@/app/components/ui/funeral/funeral";
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
@@ -21,10 +20,8 @@ export default function Quotation() {
   const [quoteType,setQuotetype] = useState<number>(1);
   const [age,setAge]= useState<number>();
   const [ageMessage,setAgeMessage]= useState<string>();
-
-
-
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter()
 
   const {
     register,
@@ -59,12 +56,12 @@ export default function Quotation() {
 
   const userAge=calculateAge(data.personalDetails.dateOfBirth);
     if(userAge<=17){
-      setAgeMessage("Age Should be 18 and above");
+      setAgeMessage("age should be 18 and above");
       return;
     }
 
     setAge(userAge);
-    handleClick();
+    handleClick(data.coverDetails.coverType);
 
     if(data.coverDetails.coverType === "Livecover"){
       setQuotetype(2);
@@ -76,14 +73,15 @@ export default function Quotation() {
     }
   };
 
-  function handleClick() {
-    setStep(step + 1);
-    setcompletedStep(completedStep + 1);
+  function handleClick(quoteType:string) {
+    if(quoteType !== "Livecover"){
+      router.push("/pages/comingsoon")
+    }else{
+      setStep(step + 1);
+      setcompletedStep(completedStep + 1);
+    }
   }
 
-  const getUser = async()=>{
-   await getLivesProducts("Male",25,10000,10000);
-  }
 
   return (
     <div className="flex bg-gray-50 w-full h-full flex-wrap">
@@ -98,7 +96,13 @@ export default function Quotation() {
           />
         </div>
         <div className="p-6">
-          <button className="border bg-white px-4 rounded-3xl py-2">
+          <button className="border bg-white px-4 rounded-3xl py-2" type='button' onClick={()=>{
+            if(step===1){
+              return
+            }else{
+              setStep(step-1);
+            }
+          }}>
             <HiArrowSmLeft className="text-3xl font-bold text-red-600" />
           </button>
         </div>
@@ -149,9 +153,9 @@ export default function Quotation() {
             )
           }
           
-          <div className="lg:p-2 w-full">
+          {/* <div className="lg:p-2 w-full">
             <FormStepper activeStep={step} />
-          </div>
+          </div> */}
 
           <div className="w-full  lg:p-4">
             <form>
@@ -354,121 +358,10 @@ export default function Quotation() {
                 {
                   quoteType  === 2 ?(
                     <LifeCover age={age as number}/>
-                  ):(<FuneralQuote/>)
+                  ):(
+                    <FuneralQuote/>
+                  )
                 }
-                
-                
-                  {/* <p className="mb-1 text-gray-500">Looking for?</p>
-                  <div className="flex items-center mb-4">
-                    <input
-                      id="default-radio-1"
-                      type="radio"
-                      value="Family"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      {...register("coverDetails.coverOption", {
-                        required: "please select cover option",
-                      })}
-                    />
-                    <label className="ms-2 text-sm font-medium text-black">
-                      Family
-                    </label>
-                    {errors.coverDetails?.coverType && (
-                      <p className="text-base ms-2 text-red-600">
-                        {errors.coverDetails?.coverOption?.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex items-center">
-                    <input
-                      id="default-radio-2"
-                      type="radio"
-                      value="Member Only"
-                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                      {...register("coverDetails.coverOption", {
-                        required: "please select cover option",
-                      })}
-                    />
-                    <label className="ms-2 text-sm font-medium text-black">
-                      Member Only
-                    </label>
-                    {errors.coverDetails?.coverType && (
-                      <p className="text-base ms-2  text-red-600">
-                        {errors.coverDetails?.coverOption?.message}
-                      </p>
-                    )}
-                  </div>
-                  <div className=" mt-3 w-full">
-                    <div className="mb-5">
-                      <label className="mb-3 block text-base text-gray-500">
-                        Cover Type
-                      </label>
-                      <select
-                        id="countries"
-                        className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        {...register("coverDetails.coverType", {
-                          required: "please select cover type",
-                        })}
-                      >
-                        <option value="" disabled>
-                          Choose Cover Type
-                        </option>
-                        <option value="Funeral">Funeral</option>
-                        <option value="Live">Live</option>
-                      </select>
-                      {errors.coverDetails?.coverType && (
-                        <p className="text-base text-red-600">
-                          {errors.coverDetails?.coverType.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className=" mt-3 w-full">
-                    <div className="mb-5">
-                      <label className="mb-3 block text-base text-gray-500">
-                        Cover Amount
-                      </label>
-                      <select
-                        className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        {...register("coverDetails.coverAmount", {
-                          required: "please select cover premium",
-                        })}
-                      >
-                        <option value="" disabled>
-                          Choose Cover Premium
-                        </option>
-                        <option value="30">M30</option>
-                        <option value="74">M74</option>
-                      </select>
-                      {errors.coverDetails?.coverAmount && (
-                        <p className="text-base text-red-600">
-                          {errors.coverDetails?.coverAmount.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  <div className=" mt-3 w-full">
-                    <div className="mb-5">
-                      <label className="mb-3 block text-base text-gray-500">
-                        Select Product
-                      </label>
-                      <select
-                        className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        {...register("coverDetails.productOption", {
-                          required: "please select a product",
-                        })}
-                      >
-                        <option value="" disabled>
-                          Choose Product
-                        </option>
-                        <option value="U Mang?">U Mang?</option>
-                      </select>
-                      {errors.coverDetails?.productOption && (
-                        <p className="text-base text-red-600">
-                          {errors.coverDetails?.productOption.message}
-                        </p>
-                      )}
-                    </div>
-                  </div> */}
                 </>
               )}
 
