@@ -11,10 +11,18 @@ import QuotationTypes from "@/app/types/quotation.types";
 import { useForm } from "react-hook-form";
 import { emailRegex, numberRegex, } from "@/lib/utils";
 import { getUserByID,getLivesProducts } from "@/api/services";
+import FuneralQuote from "@/app/components/ui/funeral/funeral";
+import LifeCover from "@/app/components/ui/livecover/lifecover";
+import { differenceInYears } from 'date-fns';
 
 export default function Quotation() {
   const [step, setStep] = useState<number>(1);
   const [completedStep, setcompletedStep] = useState<number>(0);
+  const [quoteType,setQuotetype] = useState<number>(1);
+  const [age,setAge]= useState<number>();
+  const [ageMessage,setAgeMessage]= useState<string>();
+
+
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -42,16 +50,30 @@ export default function Quotation() {
     },
   });
 
+
+  function calculateAge(birthDate: Date): number {
+    return differenceInYears(new Date(), birthDate);
+  }
+
   const onSubmit = (data: QuotationTypes) => {
-    // if (data.coverDetails.coverOption === "Member Only") {
-    //   window.location.href = pageNavigations.successPage;
-    // } else {
-    //   if (step === 3) {
-    //     window.location.href = pageNavigations.successPage;
-    //   }
-     
-    // }
+
+  const userAge=calculateAge(data.personalDetails.dateOfBirth);
+    if(userAge<=17){
+      setAgeMessage("Age Should be 18 and above");
+      return;
+    }
+
+    setAge(userAge);
     handleClick();
+
+    if(data.coverDetails.coverType === "Livecover"){
+      setQuotetype(2);
+      const  date= new Date();
+      const currentDate =date.getUTCDate();3
+      console.log(currentDate);
+    }else{
+      setQuotetype(1)
+    }
   };
 
   function handleClick() {
@@ -114,14 +136,19 @@ export default function Quotation() {
 
       <div className=" p-4 lg:p-10 bg-cover  h-full b  md:block md:w-full  w-full lg:w-2/3">
         <div className="w-full shadow-sm lg:p-4 p-2 rounded-2xl bg-white border">
-          <div className="w-full lg:p-2">
-            <p className="lg:text-3xl md:text-lg text-md font-bold text-left">
-              Fill in your details
-            </p>
-            <p className="text-black">
-              To complete the process please fill the form.
-            </p>
+          {
+            step && step === 1 &&(
+            <div className="w-full lg:p-2">
+              <p className="lg:text-3xl md:text-lg text-md font-bold text-left">
+                Fill in your details
+              </p>
+              <p className="text-black">
+                To complete the process please fill the form.
+              </p>
           </div>
+            )
+          }
+          
           <div className="lg:p-2 w-full">
             <FormStepper activeStep={step} />
           </div>
@@ -224,6 +251,12 @@ export default function Quotation() {
                             date of birth is required
                           </p>
                         )}
+
+                        {ageMessage && (
+                          <p className="text-base text-red-600">
+                            {ageMessage}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -279,12 +312,53 @@ export default function Quotation() {
                       </div>
                     </div>
                   </div>
+                  <div className=" mt-2 w-full">
+                    <div className="mb-2">
+                      <label className="mb-3 block text-base text-gray-500">
+                        Cover Type
+                      </label>
+                      <select
+                        id="countries"
+                        className="bg-white border border-gray-300 py-3 p-2.5 text-gray-900 text-sm border-[#e0e0e0] rounded-lg focus:ring-red-500 outline-none focus:border-red-400 focus:shadow-md block w-full p-2.5 "
+                        {...register("coverDetails.coverType", {
+                          required: "please select cover type",
+                        })}
+                      >
+                        <option value="" disabled>
+                          Choose Cover Type
+                        </option>
+                        <option value="Funeral">Funeral</option>
+                        <option value="Livecover">Once-Off Life Cover</option>
+                      </select>
+                      {errors.coverDetails?.coverType && (
+                        <p className="text-base text-red-600">
+                          {errors.coverDetails?.coverType.message}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="w-full mt-4">
+                <button
+                  onClick={handleSubmit(onSubmit)}
+                  type="button"
+                  className="text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 me-2 mb-2"
+                >
+                 Next
+                </button>
+              </div>
                 </>
               )}
 
               {step == 2 && (
                 <>
-                  <p className="mb-1 text-gray-500">Looking for?</p>
+                {
+                  quoteType  === 2 ?(
+                    <LifeCover age={age as number}/>
+                  ):(<FuneralQuote/>)
+                }
+                
+                
+                  {/* <p className="mb-1 text-gray-500">Looking for?</p>
                   <div className="flex items-center mb-4">
                     <input
                       id="default-radio-1"
@@ -394,7 +468,7 @@ export default function Quotation() {
                         </p>
                       )}
                     </div>
-                  </div>
+                  </div> */}
                 </>
               )}
 
@@ -435,18 +509,6 @@ export default function Quotation() {
                   </div>
                 </div>
               )}
-
-              <div className="w-full mt-4">
-                <button
-                  onClick={()=>{
-                    onSubmit()
-                  }}
-                  type="button"
-                  className="text-white w-full bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-4 me-2 mb-2"
-                >
-                  {step === 3 ? "Create Quotation" : "Next"}
-                </button>
-              </div>
             </form>
           </div>
         </div>

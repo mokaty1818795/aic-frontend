@@ -3,7 +3,7 @@ type QuotationTypes = {
     firstName: string;
     lastName: string;
     email: string;
-    dateOfBirth: string;
+    dateOfBirth: Date |any;
     phoneNumber: string;
     nationalId: string;
   };
