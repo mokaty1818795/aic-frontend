@@ -1,9 +1,11 @@
+import { StringDecoder } from "string_decoder";
+
 type QuotationTypes = {
   personalDetails: {
     firstName: string;
     lastName: string;
     email: string;
-    dateOfBirth: Date |any;
+    dateOfBirth: Date;
     phoneNumber: string;
     nationalId: string;
   };

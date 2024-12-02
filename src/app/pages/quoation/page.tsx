@@ -33,7 +33,7 @@ export default function Quotation() {
         firstName: "",
         lastName: "",
         email: "",
-        dateOfBirth: "",
+        dateOfBirth: undefined,
         phoneNumber: "",
         nationalId: "",
       },
@@ -48,13 +48,15 @@ export default function Quotation() {
   });
 
 
-  function calculateAge(birthDate: Date): number {
+  function calculateAge(birthDate: string): number {
     return differenceInYears(new Date(), birthDate);
   }
 
-  const onSubmit = (data: QuotationTypes) => {
+const onSubmit = (data: QuotationTypes) => {
 
-  const userAge=calculateAge(data.personalDetails.dateOfBirth);
+ const dateOfBirth= data.personalDetails.dateOfBirth.toString();
+
+  const userAge=calculateAge(dateOfBirth);
     if(userAge<=17){
       setAgeMessage("age should be 18 and above");
       return;
@@ -66,7 +68,7 @@ export default function Quotation() {
     if(data.coverDetails.coverType === "Livecover"){
       setQuotetype(2);
       const  date= new Date();
-      const currentDate =date.getUTCDate();3
+      const currentDate =date.getUTCDate();
       console.log(currentDate);
     }else{
       setQuotetype(1)
