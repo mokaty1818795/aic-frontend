@@ -6,6 +6,7 @@ type QuotationTypes = {
     dateOfBirth: Date;
     phoneNumber: string;
     nationalId: string;
+    gender:string;
   };
 
   coverDetails: {
