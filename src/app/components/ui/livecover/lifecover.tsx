@@ -28,7 +28,6 @@ export default function LifeCover({ age, gender }: ClientAgeProps) {
     register,
     handleSubmit,
     watch,
-    reset,
     formState: { errors },
   } = useForm<LifeCoverProps>({
     defaultValues: {
@@ -74,11 +73,11 @@ export default function LifeCover({ age, gender }: ClientAgeProps) {
     }
   };
 
-  const handleReset = () => {
-    reset();
-    setShowResults(false);
-    setResult(0);
-  };
+  // const handleReset = () => {
+  //   reset();
+  //   setShowResults(false);
+  //   setResult(0);
+  // };
 
   return (
     <div className="p-6">
