@@ -89,7 +89,7 @@ export default function Quotation() {
 
   return (
     <div className="flex bg-gray-50 w-full min-h-screen">
-      <div className=" relative hidden md:hidden lg:flex w-full min-h-screen flex-col bg-red-700 shadow-md flex-col md:w-1/2 lg:w-1/3">
+      <div className="relative h-screen hidden md:hidden lg:flex w-full flex-col bg-red-700 shadow-md flex-col md:w-1/2 lg:w-1/3">
         <div className="absolute right-0 top-0">
           <Image
             src="/top-corner-bg.png"
@@ -110,7 +110,7 @@ export default function Quotation() {
             <HiArrowSmLeft className="text-3xl font-bold text-red-600" />
           </button>
         </div>
-        <div className="flex h-screen flex-col justify-center items-center  px-6 pt-8 sm:px-24 md:pt-0 lg:px-12">
+        <div className="flex flex-col justify-center items-center my-64  px-6 pt-8 sm:px-24 md:pt-0 lg:px-12">
           <div className="bg-white rounded-xl max-w-24 p-4">
             <Image
               src="/alliance-logo.png"

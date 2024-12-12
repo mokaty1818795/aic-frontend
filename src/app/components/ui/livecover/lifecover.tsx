@@ -83,12 +83,12 @@ export default function LifeCover({ age, gender }: ClientAgeProps) {
   return (
     <div className="p-6">
       {loading && (<Loader />)}
-      <div className="border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+      <div className="border-b border-gray-200 px-4 sm:px-6 lg:px-6 py-4 sm:py-6">
         <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 text-center sm:text-left">
           Get Once-Off Life Cover Quote
         </h2>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 mt-20 lg:grid-cols-2 gap-8">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Monthly Salary
@@ -194,10 +194,9 @@ export default function LifeCover({ age, gender }: ClientAgeProps) {
         </button>
         <button
           type="button"
-          onClick={handleReset}
           className="flex-1 rounded-md bg-white text-red-600 border border-red-600 px-8 py-3 text-base font-semibold shadow-sm transition duration-150 ease-in-out hover:bg-red-50 focus:ring-2 focus:ring-red-200 focus:outline-none"
         >
-          Clear
+          Get Quoation
         </button>
       </div>
 
